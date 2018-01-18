@@ -69,7 +69,7 @@ class Processo extends Parser {
     if (!element.length) return df;
     const textValue = element.text();
     Object.assign(attributes, element.get().attribs);
-    return textValue;
+    return textValue.trim();
   }
 
   attributes(name, df = null) {
@@ -186,7 +186,7 @@ class Processo extends Parser {
   get andamentos() {
     const { $ } = this;
     return $('andamentos andamento', this.elementProcesso).map((i, andamento) => Object.assign(..._.flatten($(andamento).children().map((ik, k) =>
-      [{ [changeCase.camelCase(k.name)]: $(k).text() }, k.attribs || {}]).get()))).get();
+      [{ [changeCase.camelCase(k.name)]: $(k).text().trim() }, k.attribs || {}]).get()))).get();
   }
 
   get tags() {
